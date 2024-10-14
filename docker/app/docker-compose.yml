@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  nginx-proxy-smart:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - main_network
+
+  smarterLunch:
+    image: webdevops/php-nginx:8.2
+    container_name: smarterLunch-app
+    volumes:
+      - ./src/:/app
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public
+      - VIRTUAL_HOST=smarterLunch.local
+    networks:
+      - main_network
+    restart: always 
+
+networks:
+  main_network:
+    external: true

@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: smarterLunchDB
+    environment:
+      MYSQL_ROOT_PASSWORD: root_passwd
+      MYSQL_DATABASE: smarterLunch
+      MYSQL_USER: exampleUser
+      MYSQL_PASSWORD: examplePassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - main_network
+
+networks:
+  main_network:
+    external: true
+
+volumes:
+  mysql_data:  # defining the volume
