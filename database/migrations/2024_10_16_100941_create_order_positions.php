@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
          // Definicja klucza obcego
-         $table->foreign('id_user')->references('id')->on('users')->onDelete('No action');
+         $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
          $table->foreign('id_menu')->references('id')->on('menu_positions')->onDelete('cascade');
          $table->foreign('id_order')->references('id')->on('orders')->onDelete('cascade');
         });
