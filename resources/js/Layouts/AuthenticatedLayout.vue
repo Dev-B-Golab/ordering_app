@@ -16,11 +16,8 @@ const showingNavigationDropdown = ref(false);
     <div>
         <Background/>
         <div class="">
-            <nav
-                class=""
-            >
-                <!-- Primary Navigation Menu -->
-                <div class="">
+            <nav class="navbar navbar-expand-lg bg-primary rounded">
+                <div class="container-fluid">
                     <div class="">
                         <div class="">
 
@@ -31,6 +28,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
+                                    class="btn btn-danger"
                                 >
                                     Dashboard
                                 </NavLink>
@@ -38,7 +36,7 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="">
-                            <!-- Settings Dropdown -->
+                            <!-- Settings Dropdown ??????????--> 
                             <div class="">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
@@ -109,11 +107,13 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="">
-                            <ResponsiveNavLink :href="route('profile.edit')">
+                            <ResponsiveNavLink :href="route('profile.edit')"
+                            class="btn btn-danger">
                                 Profile
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 :href="route('logout')"
+                                class="btn btn-danger"
                                 method="post"
                                 as="button"
                             >
