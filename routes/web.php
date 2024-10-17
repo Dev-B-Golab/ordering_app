@@ -9,8 +9,6 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
 
@@ -18,7 +16,11 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/menu', [MenuScrapingController::class, 'index']);
+Route::get('/menu', function () {
+    return Inertia::render('Menu');
+})->middleware(['auth', 'verified'])->name('menu');
+
+// Route::get('/menu', [MenuScrapingController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

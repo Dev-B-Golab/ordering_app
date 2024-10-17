@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import Background from '@/Components/Background.vue';
 
 defineProps({
     canLogin: {
@@ -15,6 +16,7 @@ defineProps({
 <template>
     <Head title="Welcome" />
     <div>
+        <Background/>
         <div class="d-flex vh-100 p-3 mx-auto flex-column">
             <header class="mb-auto">
                 <div>
@@ -33,7 +35,7 @@ defineProps({
                             :href="route('login')"
                              class=" py-1 px-2 mx-2 btn btn-primary"
                         >
-                            Log in 
+                            Zaloguj 
                         </Link>
 
                         <Link
@@ -41,7 +43,7 @@ defineProps({
                             :href="route('register')"
                              class=" py-1 px-2 mx-2 btn btn-primary"
                         >
-                            Register
+                            Zarejestruj
                         </Link>
                     </template>
                 </nav>
@@ -54,7 +56,13 @@ defineProps({
                     tak, by o nikim nie zapomnaino ^^
                 </p>
                 <p class="lead">
-                <a href="#" class="btn btn-lg btn-primary fw-bold">ZAMAWIAM!</a>
+                <!-- <a href="#" class="btn btn-lg btn-primary fw-bold">ZAMAWIAM!</a> -->
+                <Link
+                    class="btn btn-lg btn-primary fw-bold"
+                    :href="route('menu')"
+                >
+                    ZAMAWIAM!
+                </Link>
                 </p>
             </main>
 

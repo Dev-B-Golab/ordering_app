@@ -1,4 +1,5 @@
 import '../css/app.css';
+import '../css/background.css';
 import '../css/bootstrap/bootstrap.min.css';
 import './Bootstrap/Bootstrap.min.js';
 import './bootstrap';
