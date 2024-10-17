@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import Background from '@/Components/Background.vue';
 
 defineProps({
     canLogin: {
@@ -15,6 +16,7 @@ defineProps({
 <template>
     <Head title="Welcome" />
     <div>
+        <Background/>
         <div class="d-flex vh-100 p-3 mx-auto flex-column">
             <header class="mb-auto">
                 <div>
