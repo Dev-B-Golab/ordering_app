@@ -24,10 +24,12 @@ defineProps({
                     <nav v-if="canLogin" class="nav nav-masthead justify-content-center float-md-end">
                     <Link
                         v-if="$page.props.auth.user"
-                         class="py-1 btn btn-primary"
-                        :href="route('dashboard')"
+                        class="py-1 btn btn-primary"
+                        :href="route('logout')"
+                        method="post"
+                        as="button"
                     >
-                        Dashboard
+                        Wyloguj
                     </Link>
 
                     <template v-else>
@@ -53,7 +55,7 @@ defineProps({
             <main class="px-3 text-center">
                 <h1>Organizer zamawiania jedzenia <i class="bi bi-emoji-grin"></i></h1>
                 <p class="lead">Pomoże podjąć decyzje skąd zamówić jedzonko oraz zorganizuje zamówienie
-                    tak, by o nikim nie zapomnaino ^^
+                    tak, by o nikim nie zapomniano ^^
                 </p>
                 <p class="lead">
                 <!-- <a href="#" class="btn btn-lg btn-primary fw-bold">ZAMAWIAM!</a> -->
