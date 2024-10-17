@@ -24,6 +24,9 @@ body {
     font-size: 2rem; /* Wielkość emoji */
     animation: float 10s infinite; /* Animacja latająca */
 }
+.container{
+    height: 100vh;
+}
 
 /* Różne animacje dla różnych emoji */
 @keyframes float {

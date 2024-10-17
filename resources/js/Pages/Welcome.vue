@@ -35,7 +35,7 @@ defineProps({
                             :href="route('login')"
                              class=" py-1 px-2 mx-2 btn btn-primary"
                         >
-                            Log in 
+                            Zaloguj 
                         </Link>
 
                         <Link
@@ -43,7 +43,7 @@ defineProps({
                             :href="route('register')"
                              class=" py-1 px-2 mx-2 btn btn-primary"
                         >
-                            Register
+                            Zarejestruj
                         </Link>
                     </template>
                 </nav>
