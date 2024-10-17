@@ -56,7 +56,13 @@ defineProps({
                     tak, by o nikim nie zapomnaino ^^
                 </p>
                 <p class="lead">
-                <a href="#" class="btn btn-lg btn-primary fw-bold">ZAMAWIAM!</a>
+                <!-- <a href="#" class="btn btn-lg btn-primary fw-bold">ZAMAWIAM!</a> -->
+                <Link
+                    class="btn btn-lg btn-primary fw-bold"
+                    :href="route('menu')"
+                >
+                    ZAMAWIAM!
+                </Link>
                 </p>
             </main>
 
