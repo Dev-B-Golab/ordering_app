@@ -3,55 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RestaurantsApi;
 use Inertia\Inertia;
-use DOMDocument;
-use DOMXPath;
 
-class MenuScrapingController extends Controller
+
+class MenuController extends Controller
 {
     public function index()
     {
-        // Pobierz HTML strony
-        $url = 'https://restaurant.com/menu'; // URL strony restauracji, z której chcesz scrapować menu
-        $response = Http::get($url);
-
-        // Sprawdź, czy odpowiedź jest prawidłowa
-        if ($response->failed()) {
-            return Inertia::render('Menu', [
-                'error' => 'Nie udało się załadować menu'
-            ]);
-        }
-
-        // Pobierz zawartość HTML
-        $html = $response->body();
-
-        // Tworzymy nowy obiekt DOMDocument i załadowujemy HTML
-        $dom = new DOMDocument();
-        @$dom->loadHTML($html);  // '@' ignoruje błędy, jeśli HTML jest niepoprawny
-
-        // Używamy DOMXPath do nawigacji po HTML
-        $xpath = new DOMXPath($dom);
-
-        // Tutaj dostosuj zapytanie XPath do struktury HTML strony restauracji
-        // Zakładamy, że pozycje menu są w <div class="menu-item">
-        $items = $xpath->query('//div[@class="menu-item"]');
-
-        $menu = [];
-
-        // Przetwarzamy elementy menu
-        foreach ($items as $item) {
-            $name = $xpath->query('.//span[@class="item-name"]', $item)->item(0)->textContent ?? 'Brak nazwy';
-            $price = $xpath->query('.//span[@class="item-price"]', $item)->item(0)->textContent ?? 'Brak ceny';
-
-            $menu[] = [
-                'name' => $name,
-                'price' => $price,
-            ];
-        }
-
-        // Przekazanie danych do Vue przez Inertia
+        $url = 'https://www.pod8jaslo.pl/api/v1/sites/restaurant_menu/216204/pl?v=ca8d8902323f9e49aae0ac25056a766d';
+        $restauranst = new RestaurantsApi();
+        // $pod8 = $restauranst->fetchRestaurantData($url);
         return Inertia::render('Menu', [
-            'menu' => $menu,
+
         ]);
     }
 }

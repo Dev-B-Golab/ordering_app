@@ -32,7 +32,7 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head title="Log in" />
-        <div class="position-absolute top-50 start-50 translate-middle w-xl-25 w-md-50 px-5 py-5 border border-primary rounded-4 bg-white">
+        <div class="position-absolute top-50 start-50 translate-middle w-xl-25 w-md-50 px-5 py-5 border border-primary rounded-4 bg-white bg-opacity-75">
             <div v-if="status" class="">
                 {{ status }}
             </div>
