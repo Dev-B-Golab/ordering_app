@@ -14,9 +14,10 @@ class MenuController extends Controller
     {
         $url = 'https://www.pod8jaslo.pl/api/v1/sites/restaurant_menu/216204/pl?v=ca8d8902323f9e49aae0ac25056a766d';
         $restauranst = new RestaurantsApi();
-        // $pod8 = $restauranst->fetchRestaurantData($url);
+        $pod8 = $restauranst->fetchRestaurantData($url);
+        // dd($pod8);
         return Inertia::render('Menu', [
-
+            'menuData' => $pod8,
         ]);
     }
 }
