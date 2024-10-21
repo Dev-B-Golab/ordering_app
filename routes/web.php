@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,7 +21,9 @@ Route::get('/dashboard', function () {
 Route::get('/menu', [MenuController::class, 'index'])->middleware(['auth', 'verified'])->name('menu');
 Route::get('/fetchDataFrom8', [MenuController::class, 'fetchDataFrom8']);
 
-// Route::get('/menu', [MenuScrapingController::class, 'index']);
+Route::get('/createOrder', [OrderController::class, 'createOrder'])->name('createOrder');
+
+Route::get('/history', [OrderController::class, 'historyOrder'])->name('history');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
