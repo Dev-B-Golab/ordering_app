@@ -28,7 +28,7 @@ defineProps({
               {{ categories.category_name }}</label>
           </div>
         </div>
-        <div class="row " style="overflow-y:auto; max-height:500px;" >
+        <div class="row border border-primary" style="overflow-y:auto; max-height:450px;" >
           <table class="table table-striped table-bordered table-responsive text-center">
             <thead>
               <tr class="sticky-top table-primary">
@@ -45,7 +45,6 @@ defineProps({
               </tr>
             </tbody>
           </table>
-          {{ menuData }}
         </div>
       </div>
     </div>
@@ -53,21 +52,5 @@ defineProps({
 </template>
 <script>
 
-export default {
-  data() {
-    return {
-      columns: [
-      'name', 'email'
-      ],
-      rows: [
-        { name: 'John Doe', email: 'john@example.com' },
-        { name: 'Jane Smith', email: 'jane@example.com' },
-        // Add more data as necessary
-      ],
-      options:{
 
-      },
-    };
-  },
-};
 </script>
