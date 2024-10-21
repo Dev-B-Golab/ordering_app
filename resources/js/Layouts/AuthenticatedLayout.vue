@@ -27,10 +27,22 @@ import Background from '@/Components/Background.vue';
                     <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav me-auto mb-2 mb-sm-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Zamówienie</a>
+                            <ResponsiveNavLink :href="route('createOrder')"
+                            class="nav-link">
+                                Utwórz zamówienie
+                            </ResponsiveNavLink>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Historia zamówień</a>
+                            <ResponsiveNavLink :href="route('menu')"
+                            class="nav-link">
+                                Menu
+                            </ResponsiveNavLink>
+                        </li>
+                        <li class="nav-item">
+                            <ResponsiveNavLink :href="route('history')"
+                            class="nav-link">
+                                Historia zamówień
+                            </ResponsiveNavLink>
                         </li>
                         <li class="nav-item">
                             <ResponsiveNavLink :href="route('profile.edit')"
@@ -44,11 +56,11 @@ import Background from '@/Components/Background.vue';
                     </ul>
                     <ResponsiveNavLink
                             :href="route('logout')"
-                            class="nav-link"
+                            class="btn btn-primary"
                             method="post"
                             as="button"
                         >
-                            Wyloguj
+                        <i class="bi bi-box-arrow-left"></i> Wyloguj
                         </ResponsiveNavLink>
                 </div>
             </div>
