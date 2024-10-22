@@ -11,9 +11,8 @@ class Order_position extends Model
 
     // Określenie, które pola są masowo przypisywalne
     protected $fillable = [
-        'id_user',
-        'id_menu',
         'id_order',
+        'order_positions_val',
         'price',
     ];
 
@@ -22,28 +21,9 @@ class Order_position extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function orders()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(Orders::class, 'id_order');
     }
 
-    /**
-     * Relacja z modelem MenuPosition.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function menuPosition()
-    {
-        return $this->belongsTo(MenuPosition::class, 'id_menu');
-    }
-
-    /**
-     * Relacja z modelem Order.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function order()
-    {
-        return $this->belongsTo(Order::class, 'id_order');
-    }
 }

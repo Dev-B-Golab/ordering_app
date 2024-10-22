@@ -12,8 +12,7 @@ class Restaurants extends Model
     // Określenie, które pola są masowo przypisywalne
     protected $fillable = [
         'name',
-        'url',
-        'phone',
+        'api_url',
     ];
 
 }

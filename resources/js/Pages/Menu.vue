@@ -59,7 +59,7 @@ watchEffect(() => {
             </thead>
             <tbody>
               <tr v-for="products in menuData.menu_positions" :key="products.id">
-                <td v-if="products.position_category == selectedCategory">{{ products.position_name }}<br>{{ products.description.pl }}</td>
+                <td v-if="products.position_category == selectedCategory"><h5><b>{{ products.position_name }}</b></h5><br>{{ products.description.pl }}</td>
                 <td v-if="products.position_category == selectedCategory">
                   <div v-for="positions in products.position_values">
                     <button v-if="positions" :key="positions"
