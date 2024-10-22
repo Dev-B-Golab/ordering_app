@@ -21,7 +21,8 @@ Route::get('/dashboard', function () {
 Route::get('/menu', [MenuController::class, 'index'])->middleware(['auth', 'verified'])->name('menu');
 Route::get('/fetchDataFrom8', [MenuController::class, 'fetchDataFrom8']);
 
-Route::get('/createOrder', [OrderController::class, 'createOrder'])->name('createOrder');
+Route::get('/createOrder', [OrderController::class, 'index'])->name('createOrder');
+Route::post('/insertOrder', [OrderController::class, 'store']);
 
 Route::get('/history', [OrderController::class, 'historyOrder'])->name('history');
 

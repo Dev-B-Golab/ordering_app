@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_token');
+            $table->string('order_token')->unique()->nullable();
             $table->unsignedBigInteger('id_admin_order');
             $table->unsignedBigInteger('id_restaurant');
-            $table->time('end_time');
+            $table->datetime('end_time');
             $table->timestamps();
 
             $table->foreign('id_admin_order')->references('id')->on('users')->onDelete('cascade');
