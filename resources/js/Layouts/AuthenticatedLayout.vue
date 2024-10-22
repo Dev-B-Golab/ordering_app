@@ -32,12 +32,12 @@ import Background from '@/Components/Background.vue';
                                 Utwórz zamówienie
                             </ResponsiveNavLink>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <ResponsiveNavLink :href="route('menu')"
                             class="nav-link">
                                 Menu
                             </ResponsiveNavLink>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <ResponsiveNavLink :href="route('history')"
                             class="nav-link">
