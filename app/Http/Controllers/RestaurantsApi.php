@@ -49,16 +49,41 @@ class RestaurantsApi extends Controller
             $praseList['menu_positions'][] = [
                 'id' => $key,
                 'position_name' => $value['name']['pl'],
-                // 'position_values' => $value['price']['values'],
                 'position_values' => [
                     0 => $value['price']['values'][0][1],
                     1 => $value['price']['values'][1][1] ?? '',
                 ],
                 'position_category' => $value['category'],
+                'description' => $value['description']
             ];
-            
         }
 
+        usort($praseList['menu_positions'], function($a, $b) {
+            $parseName = function($name) {
+                if (preg_match('/^(\d+)\.\s*(.*)$/', $name, $matches)) {
+                    return [(int)$matches[1], $matches[2]];
+                }
+                return [null, $name];
+            };
+        
+            list($numA, $textA) = $parseName($a['position_name']);
+            list($numB, $textB) = $parseName($b['position_name']);
+        
+            if ($numA !== null && $numB !== null) {
+                if ($numA != $numB) {
+                    return $numA - $numB;
+                }
+            }
+        
+            if ($numA !== null && $numB === null) {
+                return -1;
+            }
+            if ($numA === null && $numB !== null) {
+                return 1;
+            }
+        
+            return strcmp($textA, $textB);
+        });
         return $praseList;
     }
 }
