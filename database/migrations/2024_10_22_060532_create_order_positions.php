@@ -13,17 +13,14 @@ return new class extends Migration
     {
         Schema::create('order_positions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_menu');
             $table->unsignedBigInteger('id_order');
-            $table->decimal('price', 8, 2);
+            $table->json('order_positions_val');
+            $table->integer('price');
             $table->timestamps();
 
-         // Definicja klucza obcego
-         $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-         $table->foreign('id_menu')->references('id')->on('menu_positions')->onDelete('cascade');
-         $table->foreign('id_order')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('id_order')->references('id')->on('orders')->onDelete('cascade');
         });
+        
     }
 
     /**

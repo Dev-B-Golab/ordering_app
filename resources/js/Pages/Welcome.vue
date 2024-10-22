@@ -29,7 +29,7 @@ defineProps({
                         method="post"
                         as="button"
                     >
-                        Wyloguj
+                    <i class="bi bi-box-arrow-left"></i> Wyloguj
                     </Link>
 
                     <template v-else>
@@ -61,7 +61,7 @@ defineProps({
                 <!-- <a href="#" class="btn btn-lg btn-primary fw-bold">ZAMAWIAM!</a> -->
                 <Link
                     class="btn btn-lg btn-primary fw-bold"
-                    :href="route('menu')"
+                    :href="route('createOrder')"
                 >
                     ZAMAWIAM!
                 </Link>

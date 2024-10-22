@@ -18,17 +18,18 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/menu', [MenuController::class, 'index'])->middleware(['auth', 'verified'])->name('menu');
-Route::get('/fetchDataFrom8', [MenuController::class, 'fetchDataFrom8']);
-
-Route::get('/createOrder', [OrderController::class, 'createOrder'])->name('createOrder');
-
-Route::get('/history', [OrderController::class, 'historyOrder'])->name('history');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/menu/{token?}', [MenuController::class, 'index'])->name('menu');
+    Route::get('/fetchDataFrom8', [MenuController::class, 'fetchDataFrom8']);
+
+    Route::get('/createOrder', [OrderController::class, 'index'])->name('createOrder');
+    Route::post('/insertOrder', [OrderController::class, 'store']);
+
+    Route::get('/history', [OrderController::class, 'historyOrder'])->name('history');
 });
 
 require __DIR__.'/auth.php';

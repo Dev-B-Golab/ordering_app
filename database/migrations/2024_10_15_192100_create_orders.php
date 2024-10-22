@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menu_positions', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_token')->unique()->nullable();
+            $table->unsignedBigInteger('id_admin_order');
             $table->unsignedBigInteger('id_restaurant');
-            $table->string('name');
-            $table->text('ingredients');
-            $table->string('size');
-            $table->decimal('price', 8, 2);
+            $table->datetime('end_time');
             $table->timestamps();
 
-            // Definicja klucza obcego
+            $table->foreign('id_admin_order')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_restaurant')->references('id')->on('restaurants')->onDelete('cascade');
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menu');
+        Schema::dropIfExists('orders');
     }
 };
