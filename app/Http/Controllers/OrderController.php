@@ -17,21 +17,26 @@ class OrderController extends Controller
     }
 
     public function store(Request $request){
-        $date = date("Y-m-d H:i:s");
+        try{
+            $date = date("Y-m-d H:i:s");
 
-        $order = new Order([
-            'id_admin_order' => Auth::id(),
-            'id_restaurant' => $request['restaurant'],
-            'end_time' => $request['end_time']
-        ]);
-        $order->save();
-
-        $orderkey = $this->getOrderKey($order->id);
-
-        $order->update([
-            'order_token' => $orderkey,
-        ]);
-        return response()->json(['message' => ['Dziaua']], 201);
+            $order = new Order([
+                'id_admin_order' => Auth::id(),
+                'id_restaurant' => $request['restaurant'],
+                'end_time' => $request['end_time']
+            ]);
+            $order->save();
+    
+            $orderkey = $this->getOrderKey($order->id);
+    
+            $order->update([
+                'order_token' => $orderkey,
+            ]);
+            return Inertia::location(route('menu', ['token' => $orderkey]));
+        }
+        catch (Exception $e) {
+            return response()->json(['error' => [$e->getMessage()]], 500);
+        }
     }
 
     public function orderHistory(){

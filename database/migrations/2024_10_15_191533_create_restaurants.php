@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
-                $table->string('api_url');
+                $table->string('api_url')->nullable();
                 $table->timestamps(); 
         });
     }

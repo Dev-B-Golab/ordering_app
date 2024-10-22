@@ -25,6 +25,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Pod 8',
             'api_url' => 'https://www.pod8jaslo.pl/api/v1/sites/restaurant_menu/216204/pl?v=ca8d8902323f9e49aae0ac25056a766d',
         ]);
+        Restaurants::create([
+            'name' => 'Doner',
+            'api_url' => '',
+        ]);
         User::create(  [
             'name' => 'test',
             'email' => 'bartekgoab7@gmail.com',
