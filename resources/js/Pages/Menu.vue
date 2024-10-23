@@ -16,10 +16,12 @@ const props = defineProps({
     type: [String, null],
     required: true,
   },
+  id_user: {
+    type:  [Number],
+  },
 });
 
 const copyToClipboard = () => {
-     // Najpierw próbujemy użyć API Clipboard
   if (navigator.clipboard) {
     navigator.clipboard.writeText(props.share_link)
       .then(() => {
@@ -29,11 +31,10 @@ const copyToClipboard = () => {
         console.error('Błąd przy kopiowaniu: ', err);
       });
   } else {
-    // Fallback dla starszych przeglądarek: używamy execCommand
     const textarea = document.createElement('textarea');
     textarea.value = props.share_link;
-    textarea.style.position = 'fixed';  // Ukrycie elementu textarea
-    textarea.style.opacity = '0';       // Niewidoczny element
+    textarea.style.position = 'fixed';  
+    textarea.style.opacity = '0';       
 
     document.body.appendChild(textarea);
     textarea.focus();
@@ -46,11 +47,33 @@ const copyToClipboard = () => {
       console.error('Błąd przy kopiowaniu: ', err);
     }
 
-    document.body.removeChild(textarea); // Usunięcie tymczasowego elementu
+    document.body.removeChild(textarea);
   }
 };
 
 const selectedCategory = ref(null);
+
+const selectedOrders = [];
+
+const addToOrder = (product, positions) => {
+            if (!selectedOrders[props.id_user]) {
+                selectedOrders[props.id_user] = {};
+            }
+
+            if (!selectedOrders[props.id_user][product.id]) {
+                selectedOrders[props.id_user][product.id] = {
+                    name: product.position_name,
+                    order: {
+                        price1: positions,
+                        quantity: 1 
+                    }
+                };
+            } else {
+                selectedOrders[props.id_user][product.id].order.quantity += 1;
+            }
+
+            console.log(selectedOrders);
+  };
 
 watchEffect(() => {
   if (props.menuData != null && props.menuData.categories && props.menuData.categories.length > 0) {
@@ -81,7 +104,7 @@ watchEffect(() => {
             <button class="btn btn-outline-primary" type="button" id="copy-btn" @click="copyToClipboard">Kopiuj</button>
           </div>
         </div>
-        <div class="row mb-5">
+        <div class="row mb-3">
           <div class="btn-group" role="group" aria-label="Basic radio toggle button group" v-if="menuData != null">
             <label class="btn btn-outline-primary" 
                    v-for="category in menuData.categories" 
@@ -111,7 +134,7 @@ watchEffect(() => {
                 <td v-if="products.position_category == selectedCategory"><h5><b>{{ products.position_name }}</b></h5><br>{{ products.description.pl }}</td>
                 <td v-if="products.position_category == selectedCategory">
                   <div v-for="positions in products.position_values">
-                    <button v-if="positions" :key="positions"
+                    <button v-if="positions" :key="positions" @click="addToOrder(products, positions)"
                       class="btn btn-success my-1">{{ positions }} 
                       <i class="bi bi-bag-plus"></i>
                     </button> 

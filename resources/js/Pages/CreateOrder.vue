@@ -16,7 +16,7 @@ import { Head } from '@inertiajs/vue3';
     </template>   
     <div class="container-fluid">
         <div class="position-absolute top-50 start-50 translate-middle w-25 h-50 px-5 py-5 border border-primary rounded-4 bg-white bg-opacity-75">    
-            <form @submit.prevent="submitForm" class="text-center ">
+            <form @submit.prevent="submitForm" class=" ">
                 <div class="row my-5">
                     <label for="restaurant" class="form-label">Wybierz restauracje:</label>
                     <select class="form-select" name="" id="restaurant" v-model="form.restaurant">
@@ -34,7 +34,17 @@ import { Head } from '@inertiajs/vue3';
                         v-model="form.end_time"
                     />
                 </div>
-                <button type="submit" class="btn btn-primary">Utwórz</button>
+                <div class="row my-5">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="is_private" id="is_private" v-model="form.private">
+                    <label class="form-check-label" for="is_private">
+                      Prywatne zamówienie ?
+                    </label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Utwórz</button>
+                </div>
             </form>
         </div> 
     </div> 
@@ -47,6 +57,7 @@ export default {
       form: {
         restaurant: '',
         end_time: '',
+        private: false,
       },
     };
   },
@@ -56,6 +67,7 @@ export default {
         await this.$inertia.post('/insertOrder', this.form);
         this.form.restaurant = '';
         this.form.restaurant = '';
+        this.form.private = false;
       } catch (error) {
         console.error('Błąd:', error);
       }

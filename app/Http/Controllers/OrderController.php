@@ -17,13 +17,17 @@ class OrderController extends Controller
     }
 
     public function store(Request $request){
+        // dd($request);
         try{
             $date = date("Y-m-d H:i:s");
+            $is_private = $request['private'] == true ? 1 : 0;
+            // dd($is_private);
 
             $order = new Order([
-                'id_admin_order' => Auth::id(),
-                'id_restaurant' => $request['restaurant'],
-                'end_time' => $request['end_time']
+                'user_id_admin' => Auth::id(),
+                'restaurant_id' => $request['restaurant'],
+                'end_time' => $request['end_time'],
+                'private' => $is_private,
             ]);
             $order->save();
     

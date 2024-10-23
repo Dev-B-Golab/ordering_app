@@ -28,11 +28,13 @@ class MenuController extends Controller
                 $result = NULL;
                 $share_link = NULL;
             }
-
+            $id_user = Auth::id();
+            
             return Inertia::render('Menu', [
                 'menuData' => $result,
                 'order_data' => $order_data,
                 'share_link' => $share_link,
+                'id_user' => $id_user,
                 ]);
 
         }
