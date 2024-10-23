@@ -11,19 +11,20 @@ class Order extends Model
 
     protected $fillable = [
         'order_token',
-        'id_admin_order',
-        'id_restaurant',
+        'user_id_admin',
+        'restaurant_id',
         'end_time',
+        'private',
     ];
 
 
     public function admin()
     {
-        return $this->belongsTo(User::class, 'id_admin_order');
+        return $this->belongsTo(User::class, 'user_id_admin');
     }
 
     public function orderPositions()
     {
-        return $this->hasMany(Restaurants::class, 'id_restaurant');
+        return $this->hasMany(Restaurants::class, 'restaurant_id');
     }
 }

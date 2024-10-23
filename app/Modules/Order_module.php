@@ -10,7 +10,7 @@ class order_module{
     
     public function getDataForMenu($token){
         $result = DB::table('orders')
-            ->leftJoin('restaurants', 'orders.id_restaurant', '=', 'restaurants.id')
+            ->leftJoin('restaurants', 'orders.restaurant_id', '=', 'restaurants.id')
             ->where('orders.order_token', $token)
             ->get();
         $data = $result->toArray();

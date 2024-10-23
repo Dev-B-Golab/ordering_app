@@ -15,6 +15,8 @@ return new class extends Migration
                 $table->id();
                 $table->string('name');
                 $table->string('api_url')->nullable();
+                // $table->json('api_params')->nullable();  // TODO:change link 
+                // $table->string('parser_type')->nullable();   //TODO:change link 
                 $table->timestamps(); 
         });
     }

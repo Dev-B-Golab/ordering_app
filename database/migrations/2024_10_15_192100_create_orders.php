@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_token')->unique()->nullable();
-            $table->unsignedBigInteger('id_admin_order');
-            $table->unsignedBigInteger('id_restaurant');
+            $table->unsignedBigInteger('user_id_admin');
+            $table->unsignedBigInteger('restaurant_id');
             $table->datetime('end_time');
+            $table->boolean('private');
             $table->timestamps();
 
-            $table->foreign('id_admin_order')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_restaurant')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->foreign('user_id_admin')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });
     }
 

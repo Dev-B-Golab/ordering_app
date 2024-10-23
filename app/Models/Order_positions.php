@@ -12,7 +12,8 @@ class Order_position extends Model
     // Określenie, które pola są masowo przypisywalne
     protected $fillable = [
         'id_order',
-        'order_positions_val',
+        'user_id',
+        'positions',
         'price',
     ];
 
@@ -24,6 +25,11 @@ class Order_position extends Model
     public function orders()
     {
         return $this->belongsTo(Orders::class, 'id_order');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(Users::class, 'user_id');
     }
 
 }
