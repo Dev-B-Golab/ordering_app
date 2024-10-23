@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
-import { ref, watchEffect  } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 const props = defineProps({
   menuData: {
@@ -12,7 +12,43 @@ const props = defineProps({
     type: [Object, null],
     required: true,
   },
+  share_link: {
+    type: [String, null],
+    required: true,
+  },
 });
+
+const copyToClipboard = () => {
+     // Najpierw próbujemy użyć API Clipboard
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(props.share_link)
+      .then(() => {
+        alert('Skopiowano: ' + props.share_link);
+      })
+      .catch(err => {
+        console.error('Błąd przy kopiowaniu: ', err);
+      });
+  } else {
+    // Fallback dla starszych przeglądarek: używamy execCommand
+    const textarea = document.createElement('textarea');
+    textarea.value = props.share_link;
+    textarea.style.position = 'fixed';  // Ukrycie elementu textarea
+    textarea.style.opacity = '0';       // Niewidoczny element
+
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+
+    try {
+      document.execCommand('copy');
+      alert('Skopiowano: ' + props.share_link);
+    } catch (err) {
+      console.error('Błąd przy kopiowaniu: ', err);
+    }
+
+    document.body.removeChild(textarea); // Usunięcie tymczasowego elementu
+  }
+};
 
 const selectedCategory = ref(null);
 
@@ -39,6 +75,12 @@ watchEffect(() => {
     </template>   
     <div class="container-fluid">
       <div class="position-absolute top-50 start-50 translate-middle w-75 h-75 px-5 py-5 border border-primary rounded-4 bg-white bg-opacity-75">
+        <div class="row my-2">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" :value="share_link" disabled  aria-label="" aria-describedby="copy-btn">
+            <button class="btn btn-outline-primary" type="button" id="copy-btn" @click="copyToClipboard">Kopiuj</button>
+          </div>
+        </div>
         <div class="row mb-5">
           <div class="btn-group" role="group" aria-label="Basic radio toggle button group" v-if="menuData != null">
             <label class="btn btn-outline-primary" 
@@ -56,7 +98,7 @@ watchEffect(() => {
             </label>
           </div>
         </div>
-        <div class="row border border-primary" style="overflow-y:auto; max-height:90%;">
+        <div class="row border border-primary" style="overflow-y:auto; max-height:75%;">
           <table class="table table-striped table-bordered table-responsive text-center">
             <thead>
               <tr class="sticky-top table-primary">

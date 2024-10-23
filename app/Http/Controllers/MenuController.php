@@ -20,15 +20,19 @@ class MenuController extends Controller
 
                 $restauranst = new RestaurantsApi();
                 $result = $restauranst->fetchRestaurantData($order_data->api_url);
+                $share_link = env('APP_URL').$token;
+
             }
             else{
                 $order_data = NULL;
                 $result = NULL;
+                $share_link = NULL;
             }
 
             return Inertia::render('Menu', [
                 'menuData' => $result,
-                'order_data' => $order_data
+                'order_data' => $order_data,
+                'share_link' => $share_link,
                 ]);
 
         }
