@@ -17,18 +17,19 @@ class MenuController extends Controller
             $order_module = new Order_module;
             if($token != null){
                 $order_data = $order_module->getDataForMenu($token);
+
+                $restauranst = new RestaurantsApi();
+                $result = $restauranst->fetchRestaurantData($order_data->api_url);
             }
             else{
                 $order_data = NULL;
+                $result = NULL;
             }
 
-            $restauranst = new RestaurantsApi();
-            $result = $restauranst->fetchRestaurantData($order_data->api_url);
-
-                return Inertia::render('Menu', [
-                    'menuData' => $result,
-                    'order_data' => $order_data
-                    ]);
+            return Inertia::render('Menu', [
+                'menuData' => $result,
+                'order_data' => $order_data
+                ]);
 
         }
         catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){

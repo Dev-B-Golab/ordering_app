@@ -78,7 +78,9 @@ watchEffect(() => {
               </tr>
             </tbody>
             <tbody v-else>
-              <td colspan="2">Brak danych</td>
+              <tr>
+                <td colspan="2">Brak danych</td>
+              </tr>
             </tbody>
           </table>
         </div>
