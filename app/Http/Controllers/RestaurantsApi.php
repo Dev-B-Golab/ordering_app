@@ -46,16 +46,28 @@ class RestaurantsApi extends Controller
             ];
         }
         foreach($result['catalogue']['products'] as $key => $value){
+            $priceValues = $value['price']['values'];
+            $multipliedPrice0 = isset($priceValues[0][1]) ? $priceValues[0][1] * 100 : '';
+            $multipliedPrice1 = isset($priceValues[1][1]) ? $priceValues[1][1] * 100 : '';
             $praseList['menu_positions'][] = [
                 'id' => $key,
                 'position_name' => $value['name']['pl'],
-                'position_values' => [
-                    0 => $value['price']['values'][0][1],
-                    1 => $value['price']['values'][1][1] ?? '',
+                'options' => [
+                    'price' => [
+                        0 => $multipliedPrice0,
+                        1 => $multipliedPrice1,
+                    ],
+                    'size' => [
+                        0 => 'Mały',
+                        1 => 'Duży', // TODO: zmienic na pobieranie z api ilosc rozmiarow i cene 
+                    ],
                 ],
                 'position_category' => $value['category'],
                 'description' => $value['description']
             ];
+        }
+        foreach ($praseList['menu_positions'] as $key => &$value) {
+            sort($value['options']['price']); 
         }
 
         usort($praseList['menu_positions'], function($a, $b) {
